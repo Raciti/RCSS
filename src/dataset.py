@@ -258,56 +258,6 @@ class KSpace_Dataset(Dataset):
         
         return V_tensor, label_tensor
 
-class FangDataset(Dataset):
-    def __init__(self, data, patch_size=128, use_registered=True):
-        if isinstance(data, str):
-            self.df = pd.read_csv(data)
-        else:
-            self.df = data.reset_index(drop=True) 
-            
-        self.patch_size = patch_size
-        self.use_registered = use_registered
-        
-        self.transform = Compose([
-            LoadImage(image_only=True),                     
-            EnsureChannelFirst(channel_dim="no_channel"),   
-            Orientation(axcodes="RAS")                     
-        ])
-
-    def __len__(self):
-        return len(self.df)
-
-    def __getitem__(self, idx):
-        row = self.df.iloc[idx]
-        project = row['Project']
-        prefix = row['prefix']
-        label = row['Model']
-        
-        if project == 'ADNI':
-            folder = "ADNI_registered" if self.use_registered else "ADNI_nifti"
-            file_path = f"../../../dataset/ADNI/{folder}/{prefix}.nii.gz"
-        elif project == 'PPMI':
-            folder = "PPMI_registered" if self.use_registered else "PPMI_nifti"
-            file_path = f"../../../dataset/PPMI/{folder}/{prefix}.nii.gz"
-        else:
-            raise ValueError(f"Progetto non riconosciuto: {project}")
-            
-        V_tensor = self.transform(file_path).float()
-        
-        D = V_tensor.shape[3]
-        middle_idx = D // 2
-        slice_2d = V_tensor[:, :, :, middle_idx]  
-        
-        _, W, H = slice_2d.shape
-        start_w = max(0, (W - self.patch_size) // 2)
-        start_h = max(0, (H - self.patch_size) // 2)
-        
-        patch_2d = slice_2d[:, start_w:start_w+self.patch_size, start_h:start_h+self.patch_size]
-        
-        label_tensor = torch.tensor(label, dtype=torch.long)
-        
-        return patch_2d, label_tensor
-
 class RealFake_KSpace_Dataset(Dataset):
     def __init__(self, data, use_global_subtraction=True, kspace=True, ablation_type="Pure_KSS", generalization=None):
         """
