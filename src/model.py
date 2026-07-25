@@ -184,11 +184,11 @@ class KSpaceMLPMixer3D(nn.Module):
         patch_size=16,            
         in_channels=1,
         num_classes=6,
-        dim=256,
+        dim=128,
         depth=8,
-        tokens_mlp_dim=128,
-        channels_mlp_dim=1024,
-        dropout=0.1
+        tokens_mlp_dim=256,
+        channels_mlp_dim=512,
+        dropout=0.4
     ):
         super().__init__()
         self.image_size = image_size
@@ -282,11 +282,11 @@ class KSpaceMLPMixer3D_ArcFace(nn.Module):
         patch_size=16,        
         in_channels=1,
         num_classes=6,
-        dim=256,
-        depth=8,
-        tokens_mlp_dim=128,
-        channels_mlp_dim=1024,
-        dropout=0.0,
+        dim=128,
+        depth=6,
+        tokens_mlp_dim=256,
+        channels_mlp_dim=512,
+        dropout=0.4,
         s=30.0,
         m=0.50
     ):
