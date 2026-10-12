@@ -1,4 +1,4 @@
-# The K-Space Signature: Frequency-Domain Representation Learning for Medical Deepfake Detection
+# KSFS: K-Space Frequency Signature]{K-Space Frequency Signature: Spectral Representation Learning for Medical Deepfake Detection
 
 ![Pipeline](img/PIPELINE.png)
 
@@ -8,9 +8,9 @@ This repository contains the official codebase for the forensic framework design
 
 Modern generative models, such as MAISI and Med-DDPM, produce fully synthetic 3D MRI volumes that are visually indistinguishable from authentic scans. Automatically detecting these forgeries is critical to prevent diagnostic fraud and protect the integrity of uncorrupted clinical datasets. 
 
-This framework shifts the forensic analysis from the conventional spatial domain to the frequency domain. We introduce the **K-Space Signature (KSS)**, a novel representation obtained by subtracting an empirical global anatomical prior—computed as the average spectral volume in the Logarithmic Power Spectral Density (Log-PSD) domain. This process suppresses anatomical variance to expose acquisition- and generation-specific fingerprints that manifest as systematic, higher-frequency spectral deviations. 
+This framework shifts the forensic analysis from the conventional spatial domain to the frequency domain. We introduce the **K-Space Frequency Signature (KSFS)**, a novel representation obtained by subtracting an empirical global anatomical prior—computed as the average spectral volume in the Logarithmic Power Spectral Density (Log-PSD) domain.
 
-Because standard Convolutional Neural Networks (CNNs) struggle to capture the globally distributed artifacts inherent to frequency-domain signals, this repository also implements a new 3D version of the MLP-Mixer architecture tailored for the spectral domain, equipped with an ArcFace metric-learning head.
+Because standard Convolutional Neural Networks (CNNs) struggle to capture the globally distributed artifacts inherent to frequency-domain signals, this repository also implements a new 3D version of the MLP-Mixer architecture tailored for the spectral domain.
 
 ## Dataset
 
