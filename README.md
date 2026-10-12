@@ -1,4 +1,4 @@
-# KSFS: K-Space Frequency Signature]{K-Space Frequency Signature: Spectral Representation Learning for Medical Deepfake Detection
+# KSFS: K-Space Frequency Signature K-Space Frequency Signature: Spectral Representation Learning for Medical Deepfake Detection
 
 ![Pipeline](img/PIPELINE.png)
 
